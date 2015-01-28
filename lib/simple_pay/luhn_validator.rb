@@ -1,5 +1,5 @@
 module SimplePay
-  module Luhn extend self
+  module LuhnValidator extend self
     def valid?(card_number)
       true
     end

@@ -10,7 +10,7 @@ module SimplePay
     end
 
     def valid?
-      number.to_s.match(/^\d{,19}$/) && Luhn.valid?(number)
+      number.to_s.match(/^\d{,19}$/) && LuhnValidator.valid?(number)
     end
   end
 end

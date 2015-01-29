@@ -47,11 +47,9 @@ module SimplePay
       Report.print @records
     end
 
-    private
-
     def find_by_name name, &block
       @records.find {|r| r.name.eql? name }.tap do |record|
-        block.call(record) unless record.nil?
+        block.call(record) if block && !record.nil?
       end
     end
   end

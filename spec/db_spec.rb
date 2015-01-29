@@ -51,15 +51,33 @@ describe SimplePay::DB do
   end
 
   describe '#charge' do
-
+    it 'increase balance of the credit card by given name' do
+      subject.add? name: 'Tom', number: 041321321, limit: 1000
+      subject.charge name: 'Tom', value: 500
+      subject.find_by_name('Tom').balance.must_equal 500
+    end
   end
 
   describe '#credit' do
-
+    it 'decrease balance of the credit card by given name' do
+      subject.add? name: 'Tom', number: 041321321, limit: 1000
+      subject.credit name: 'Tom', value: 500
+      subject.find_by_name('Tom').balance.must_equal(-500)
+    end
   end
 
   describe '#to_txt' do
+    it 'output records alphabetically' do
+      records = mock()
+      records.expect(:sort!, nil)
+      subject.instance_variable_set :@records, records
 
+      SimplePay::Report.stub :print, nil do
+        subject.to_txt
+      end
+
+      records.verify
+    end
   end
 
 end

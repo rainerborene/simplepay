@@ -13,17 +13,18 @@ module SimplePay
       end
     end
 
-    def exist?
-      File.exists? path
-    end
-
     def load!
       file = File.open(path)
       @records = Marshal.load(file)
       file.close
     end
 
-    def add(name:, number:, limit:)
+    # mimic Set#add? behavior.
+    def add?(name:, number:, limit:)
+      unless @records.find{|r| r.name.eql? name }.nil?
+        return nil
+      end
+
       Card.new({ name: name, number: number, limit: limit }).tap do |card|
         @records << card
       end
@@ -42,7 +43,8 @@ module SimplePay
     end
 
     def to_txt
-      Report.print(@records)
+      @records.sort! {|x,y| x.name <=> y.name }
+      Report.print @records
     end
 
     private

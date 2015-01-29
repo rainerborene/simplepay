@@ -4,7 +4,7 @@ module SimplePay
 
     def self.start(args = ARGV, argc = ARGV.size)
       @db = DB.new('simplepay.db')
-      @db.load! if @db.exist?
+      @db.load! if File.exists? @db.path
 
       if argc == 1
         read_file(args.first)
@@ -29,7 +29,7 @@ module SimplePay
       case cmd
       when /charge/i then @db.charge name: line[0], value: line[1].to_fixnum rescue nil
       when /credit/i then @db.credit name: line[0], value: line[1].to_fixnum
-      when /add/i then @db.add name: line[0], number: line[1], limit: line[2]
+      when /add/i then @db.add? name: line[0], number: line[1], limit: line[2]
       else error "invalid operation."
       end
     end

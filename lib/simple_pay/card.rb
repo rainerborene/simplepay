@@ -3,6 +3,8 @@ module SimplePay
   end
 
   class Card
+    using Extensions
+
     attr_accessor :name
     attr_reader :number, :balance, :limit
 
@@ -15,7 +17,7 @@ module SimplePay
     end
 
     def amount
-      "$#{balance}"
+      "$#{balance.round}"
     end
 
     def charge(value)
@@ -32,10 +34,10 @@ module SimplePay
       !number.to_s.match(/^\d{,19}$/).nil? && Luhn.valid?(number)
     end
 
-    # type cast writer methods
+    # type casting
     %i(number balance limit).each do |name|
       define_method("#{name}=") do |value|
-        value = value.to_s.gsub(/\D/, '').to_i unless value.is_a? Fixnum
+        value = value.to_fixnum if value.is_a? ::String
         instance_variable_set(:"@#{name}", value)
       end
     end

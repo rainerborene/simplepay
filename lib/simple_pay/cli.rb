@@ -1,11 +1,13 @@
 module SimplePay
   class CLI
+    using Extensions
+
     def self.start(args = ARGV, argc = ARGV.size)
       @db = DB.new('simplepay.db')
       @db.load! if @db.exist?
 
       if argc == 1
-        read_file
+        read_file(args.first)
       elsif argc == 3 || argc == 4
         process(args)
       else
@@ -16,15 +18,18 @@ module SimplePay
       @db.to_txt
     end
 
-    def self.read_file()
+    def self.read_file(path)
+      IO.foreach(path) do |line|
+        process line.split(' ')
+      end
     end
 
     def self.process(line)
       cmd = line.shift
       case cmd
-      when /charge/i then @db.charge name: line[0], value: line[1].to_i
-      when /credit/i then @db.credit name: line[0], value: line[1].to_i
-      when /add/i then @db.add name: line[0], number: line[1], value: line[2]
+      when /charge/i then @db.charge name: line[0], value: line[1].to_fixnum rescue nil
+      when /credit/i then @db.credit name: line[0], value: line[1].to_fixnum
+      when /add/i then @db.add name: line[0], number: line[1], limit: line[2]
       else error "invalid operation."
       end
     end

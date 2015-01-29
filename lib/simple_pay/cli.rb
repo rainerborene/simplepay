@@ -30,8 +30,8 @@ module SimplePay
 
     def self.process(line)
       case line.shift
-      when /charge/i then @db.charge name: line[0], value: line[1].to_fixnum rescue nil
-      when /credit/i then @db.credit name: line[0], value: line[1].to_fixnum
+      when /charge/i then @db.charge name: line[0], value: line[1].to_number rescue nil
+      when /credit/i then @db.credit name: line[0], value: line[1].to_number
       when /add/i then @db.add? name: line[0], number: line[1], limit: line[2]
       else error "invalid operation."
       end

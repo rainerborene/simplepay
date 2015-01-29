@@ -68,15 +68,15 @@ describe SimplePay::DB do
 
   describe '#to_txt' do
     it 'output records alphabetically' do
-      records = mock()
-      records.expect(:sort!, nil)
-      subject.instance_variable_set :@records, records
+      stdout = ""
 
-      SimplePay::Report.stub :print, nil do
+      subject.add? name: 'Tom', number: VALID_CREDIT_CARDS.sample, limit: 1000
+
+      $stdout.stub :puts, proc {|v| stdout << v } do
         subject.to_txt
       end
 
-      records.verify
+      stdout.must_equal "Tom: $0"
     end
   end
 

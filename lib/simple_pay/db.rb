@@ -44,7 +44,9 @@ module SimplePay
 
     def to_txt
       @records.sort! {|x,y| x.name <=> y.name }
-      Report.print @records
+      @records.each do |record|
+        puts "#{record.name}: #{record.valid?? record.amount : 'Error'}"
+      end
     end
 
     def find_by_name name, &block

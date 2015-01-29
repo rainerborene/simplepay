@@ -54,7 +54,7 @@ $ bin/simplepay spec/fixtures.txt
 
 ## extra mile
 
-- persistent objects using ruby marshalling
+- persistance using ruby marshaller
 
 ## spec
 

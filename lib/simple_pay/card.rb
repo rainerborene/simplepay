@@ -37,7 +37,7 @@ module SimplePay
     # type casting
     %i(number balance limit).each do |name|
       define_method("#{name}=") do |value|
-        value = value.to_fixnum if value.is_a? ::String
+        value = value.to_fixnum if value.is_a? String
         instance_variable_set(:"@#{name}", value)
       end
     end

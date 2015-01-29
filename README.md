@@ -21,17 +21,17 @@ $ git clone git@github.com:rainerborene/simplepay.git
 you can pass data using space delimited arguments, via stdin or a file path.
 
 ```bash
-$ simplepay Add Jane 4111111111111111 \$1000 \
-            Add Lisa 5454545454545454 \$3000 \
-            ...
+$ bin/simplepay Add Jane 4111111111111111 \$1000 \
+                Add Lisa 5454545454545454 \$3000 \
+                ...
 ```
 
 ```bash
-$ cat data.txt | simplepay
+$ cat spec/fixtures.txt | bin/simplepay
 ```
 
 ```bash
-$ simplepay data.txt
+$ bin/simplepay spec/fixtures.txt
 ```
 
 ## design decisions

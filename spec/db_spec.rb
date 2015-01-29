@@ -1,4 +1,3 @@
-require 'tempfile'
 require_relative 'spec_helper'
 
 describe SimplePay::DB do

@@ -36,14 +36,14 @@ describe SimplePay::DB do
       subject.instance_variable_set :@records, nil
 
       subject.load!
-      subject.records.must_equal []
+      subject.instance_variable_get(:@records).must_equal []
     end
   end
 
   describe '#add' do
     it 'create a new credit card for a given name, card number, and limit' do
       item = ['Tom', 4111111111111111, '$1000']
-      record = subject.add(item)
+      record = subject.add(name: item[0], number: item[1], limit: item[2])
       record.name.must_equal item[0]
       record.number.must_equal item[1]
       record.limit.must_equal 1000

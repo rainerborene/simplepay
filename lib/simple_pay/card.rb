@@ -3,7 +3,8 @@ module SimplePay
   end
 
   class Card
-    attr_accessor :name, :number, :balance, :limit
+    attr_accessor :name
+    attr_reader :number, :balance, :limit
 
     def initialize(attributes={})
       attributes.each do |key, value|
@@ -14,13 +15,11 @@ module SimplePay
     end
 
     def amount
-      "$#{balance.round}"
+      "$#{balance}"
     end
 
     def charge(value)
-      if @balance + value > limit
-        raise CardError.new("charge declined")
-      end
+      raise CardError.new("charge declined") if @balance + value > limit
 
       @balance += value
     end
@@ -31,6 +30,14 @@ module SimplePay
 
     def valid?
       !number.to_s.match(/^\d{,19}$/).nil? && Luhn.valid?(number)
+    end
+
+    # type cast writer methods
+    %i(number balance limit).each do |name|
+      define_method("#{name}=") do |value|
+        value = value.to_s.gsub(/\D/, '').to_i unless value.is_a? Fixnum
+        instance_variable_set(:"@#{name}", value)
+      end
     end
   end
 end

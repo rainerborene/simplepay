@@ -9,8 +9,6 @@ INVALID_CREDIT_CARDS = [1234567890123456]
 
 class MiniTest::Spec
   def described_class
-    @described_class ||= self.class.ancestors.select { |c|
-      c.respond_to? :desc
-    }[-2].desc
+    @described_class ||= self.class.ancestors.select {|c| c.respond_to? :desc }[-2].desc
   end
 end

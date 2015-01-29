@@ -1,6 +1,6 @@
 module SimplePay
-  module Luhn extend self
-    def valid?(card_number)
+  module Luhn
+    def self.valid?(card_number)
       number = card_number.to_s.each_char.map(&:to_i).reverse
       total = number.each_with_index.inject(0) do |sum, (value, index)|
         value *= 2 if index.odd?

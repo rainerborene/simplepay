@@ -2,14 +2,18 @@ module SimplePay
   class CLI
     using Extensions
 
-    def self.start(args = ARGV, argc = ARGV.size)
+    def self.start
       @db = DB.new('simplepay.db')
       @db.load! if File.exists? @db.path
 
-      if argc == 1
-        read_file(args.first)
-      elsif argc == 3 || argc == 4
-        process(args)
+      if !STDIN.tty?
+        STDIN.read.split("\n").each do |line|
+          process line.split(' ')
+        end
+      elsif ARGV.size == 1
+        read_file(ARGV.first)
+      elsif ARGV.size.between?(3, 4)
+        process(ARGV)
       else
         error "wrong number of arguments."
       end

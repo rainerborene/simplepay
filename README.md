@@ -18,7 +18,7 @@ clone this repository to your local machine.
 $ git clone git@github.com:rainerborene/simplepay.git
 ```
 
-you can pass data using space delimited arguments, via stdin or a file path.
+you can pass arguments using these methods:
 
 ```bash
 $ bin/simplepay Add Jane 4111111111111111 \$1000 \
@@ -27,11 +27,11 @@ $ bin/simplepay Add Jane 4111111111111111 \$1000 \
 ```
 
 ```bash
-$ cat spec/fixtures.txt | bin/simplepay
+$ bin/simplepay spec/fixtures.txt
 ```
 
 ```bash
-$ bin/simplepay spec/fixtures.txt
+$ cat spec/fixtures.txt | bin/simplepay
 ```
 
 ## design decisions
@@ -51,6 +51,10 @@ $ bin/simplepay spec/fixtures.txt
 - declined charges raises `CardError` exception. you can rescue and ignore it.
 
 - no external dependencies.
+
+- no documentation. code and specs are self explaining.
+
+- well written README does matter.
 
 ## extra mile
 

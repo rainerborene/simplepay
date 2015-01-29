@@ -1,40 +1,40 @@
 # simplepay
 
-exercise.
+Proof of concept.
 
-## why ruby?
+## Why Ruby?
 
-metaprogramming is awesome. :bomb:
+Ruby is the language I am most comfortable with.
 
-## requirements
+## Requirements
 
 - Ruby 2.x
 
-## usage
+## Usage
 
-clone this repository to your local machine.
+Clone this repository to your local machine.
 
-```bash
+```shell
 $ git clone git@github.com:rainerborene/simplepay.git
 ```
 
-you can pass arguments using these methods:
+Choose which method you want to pass arguments:
 
-```bash
+```shell
 $ bin/simplepay Add Jane 4111111111111111 \$1000 \
                 Add Lisa 5454545454545454 \$3000 \
                 ...
 ```
 
-```bash
+```shell
 $ bin/simplepay spec/fixtures.txt
 ```
 
-```bash
+```shell
 $ cat spec/fixtures.txt | bin/simplepay
 ```
 
-## design decisions
+## Design Decisions
 
 - using `to_s` and regular expression on `CreditCard#valid?` method to validate
   length and numeric type. you could use logarithm method to get the number of
@@ -56,12 +56,10 @@ $ cat spec/fixtures.txt | bin/simplepay
 
 - well written README does matter.
 
-## extra mile
+- persistence using ruby marshaller **(extra mile)**
 
-- persistance using ruby marshaller
+## Spec
 
-## spec
-
-```bash
+```shell
 $ rake test
 ```

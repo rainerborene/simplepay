@@ -2,6 +2,10 @@
 
 Exercise.
 
+## Why Ruby?
+
+Metaprogramming is awesome. :bomb:
+
 ## Requirements
 
 - Ruby 2.x
@@ -13,21 +17,25 @@ $ git clone git@github.com:rainerborene/simplepay.git
 $ ./bin/simplepay
 ```
 
-## Design decisions
+## Design Decisions
 
-- use `to_s` and regular expression on `CreditCard#valid?` method to validate
-  length and numeric type. an alternative is to use logarithm method to get
-  the number of digits. I didn't benchmark both methods to see which one is more
-  efficient yet.
+- using `to_s` and regular expression on `CreditCard#valid?` method to validate
+  length and numeric type. you could use logarithm method to get the number of
+  digits as an alternative. I didn't benchmark both methods to see which one is
+  more efficient yet.
 
 - `autoload` modules is a best practice on large ruby libraries.
 
-- control version software from day zero. `git` is all about communication
+- version control software from day zero. `git` is all about communication
   not only file versioning.
+
+- easy distribution on RubyGems with the current skeleton.
+
+- declined charges raises `CardError` exception. you can rescue and ignore it.
 
 - no external dependencies.
 
-## Specs
+## Spec
 
 ```bash
 $ rake test

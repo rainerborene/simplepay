@@ -1,4 +1,6 @@
 module SimplePay
-  autoload :CreditCard,    'simple_pay/credit_card'
-  autoload :LuhnValidator, 'simple_pay/luhn_validator'
+  autoload :Card,   'simple_pay/card'
+  autoload :Luhn,   'simple_pay/luhn'
+  autoload :CLI,    'simple_pay/cli'
+  autoload :Report, 'simple_pay/report'
 end

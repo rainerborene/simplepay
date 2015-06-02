@@ -1,5 +1,9 @@
 # simplepay
 
+[![Build Status](https://travis-ci.org/rainerborene/simplepay.svg)](https://travis-ci.org/rainerborene/simplepay)
+[![Code Climate](https://codeclimate.com/github/rainerborene/simplepay/badges/gpa.svg)](https://codeclimate.com/github/rainerborene/simplepay)
+[![Test Coverage](https://codeclimate.com/github/rainerborene/simplepay/badges/coverage.svg)](https://codeclimate.com/github/rainerborene/simplepay/coverage)
+
 A simple command-line demo.
 
 ## Usage
